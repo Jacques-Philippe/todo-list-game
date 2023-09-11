@@ -1,4 +1,4 @@
-using TMPro;
+using System.Linq;
 using UnityEngine;
 
 public class ConversationUI : MonoBehaviour
@@ -7,41 +7,43 @@ public class ConversationUI : MonoBehaviour
     private GameObject window;
 
     [SerializeField]
-    private TextMeshProUGUI speakerText;
+    private DefaultPhraseUI defaultPhraseUI;
 
     [SerializeField]
-    private TextMeshProUGUI contentText;
+    private PromptPhraseUI promptPhraseUI;
 
-    public string Speaker {
-        set
-        {
-            speakerText.text = value;
-        }
-        get
-        {
-            return this.speakerText.text;
-        }
-    }
-    public string Content
+    public void Display(PhraseNode node)
     {
-        set
+        this.CloseAll();
+        
+        if (node is DefaultPhraseNode)
         {
-            contentText.text = value;
+            defaultPhraseUI.Open();
+            this.SetSpeakerAndContent(node, defaultPhraseUI);
         }
-        get
+        else if (node is PromptPhraseNode promptPhraseNode)
         {
-            return this.contentText.text;
+            promptPhraseUI.Open();
+            this.SetSpeakerAndContent(node, promptPhraseUI);
+            promptPhraseUI.Options = promptPhraseNode.Options.Select(o => o.Content).ToList();
         }
-    }
-
-    public void Open()
-    {
-        this.window.SetActive(true);
     }
 
     public void Close()
     {
-        this.window.SetActive(false);
+        this.CloseAll();
+    }
+
+    private void SetSpeakerAndContent(PhraseNode node, DefaultPhraseUI phraseUI)
+    {
+        phraseUI.Speaker = node.Speaker.Name;
+        phraseUI.Content = node.Content;
+    }
+
+    private void CloseAll()
+    {
+        defaultPhraseUI.Close();
+        promptPhraseUI.Close();
     }
 
 }

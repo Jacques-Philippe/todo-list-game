@@ -7,6 +7,11 @@ public class Conversation
         private set {
             this.current = value;
             this.CurrentChanged?.Invoke();
+
+            if (this.Current == null)
+            {
+                this.ConversationEnded?.Invoke();
+            }
         }
         get => this.current;
     }
@@ -22,16 +27,35 @@ public class Conversation
         this.Current = start;
     }
 
+    /// <summary>
+    /// Return the next phrase node given the current phrase node is a default phase node
+    /// </summary>
+    /// <returns></returns>
     public PhraseNode Next()
     {
-        if (this.Current is not DefaultPhraseNode defaultPhraseNode){
+        if (this.Current is not DefaultPhraseNode defaultPhraseNode)
+        {
             return null;
         }
         this.Current = defaultPhraseNode.Next;
-        if (this.Current == null)
+        
+        return this.Current;
+    }
+
+    /// <summary>
+    /// Return the next phrase node given the incoming choice given the current phrase node is a prompt phrase node
+    /// </summary>
+    /// <param name="option"></param>
+    /// <returns></returns>
+    public PhraseNode Next(DefaultPhraseNode option)
+    {
+        if (this.Current is not PromptPhraseNode promptPhraseNode)
         {
-            this.ConversationEnded?.Invoke();
+            return null;
         }
+
+        this.Current = promptPhraseNode.NextPhraseNodeGivenInput(option);
+
         return this.Current;
     }
 }

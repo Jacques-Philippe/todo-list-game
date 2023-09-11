@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ConversationManager : MonoBehaviour
@@ -5,7 +6,6 @@ public class ConversationManager : MonoBehaviour
     [SerializeField]
     private ConversationUI conversationUI;
 
-    private ConversationMember jerry = new ConversationMember("Jerry");
     public Conversation Conversation { private set; get; }
 
     private void Awake()
@@ -15,8 +15,7 @@ public class ConversationManager : MonoBehaviour
 
     public void StartConversation()
     {
-        this.conversationUI.Open();
-        this.UpdateConversationUI(this.Conversation);
+        this.conversationUI.Display(this.Conversation.Current);
     }
 
     public void Next()
@@ -29,37 +28,36 @@ public class ConversationManager : MonoBehaviour
 
     private void InitializeConversations()
     {
-        DefaultPhraseNode phrase3 = new DefaultPhraseNode("I think.", jerry);
-        DefaultPhraseNode phrase2 = new DefaultPhraseNode("My name's Jerry.", jerry, phrase3);
-        DefaultPhraseNode phrase1 = new DefaultPhraseNode("Hey.", jerry, phrase2);
+        ConversationMember jerry = new ConversationMember("Jerry");
+        ConversationMember player = new ConversationMember("Player");
 
-        Conversation = new Conversation(phrase1);
+        DefaultPhraseNode end_good = new DefaultPhraseNode("I'm glad!", jerry);
+        DefaultPhraseNode end_bad = new DefaultPhraseNode("That's too bad!", jerry);
 
-        Conversation.CurrentChanged += () =>
+        DefaultPhraseNode good = new DefaultPhraseNode("Good.", player, end_good);
+        DefaultPhraseNode bad = new DefaultPhraseNode("Bad.", player, end_bad);
+        List<DefaultPhraseNode> options = new List<DefaultPhraseNode>()
         {
-            if (Conversation.Current == null)
-            {
-                return;
-            }
-            
-            this.UpdateConversationUI(this.Conversation);
+            good, bad
         };
 
-        Conversation.ConversationEnded += () =>
+        PromptPhraseNode phrase2 = new PromptPhraseNode("How are you?", jerry, options);
+        DefaultPhraseNode phrase1 = new DefaultPhraseNode("Hi.", jerry, phrase2);
+
+        var conversation = new Conversation(phrase1);
+
+        conversation.CurrentChanged += () =>
+        {
+            this.conversationUI.Display(this.Conversation.Current);
+        };
+
+        conversation.ConversationEnded += () =>
         {
             this.conversationUI.Close();
         };
 
-    }
+        this.Conversation = conversation;
 
-    private void UpdateConversationUI(Conversation conversation)
-    {
-        var phrase = conversation.Current;
-        var speaker = phrase.Speaker.Name;
-        var content = phrase.Content;
-
-        this.conversationUI.Speaker = speaker;
-        this.conversationUI.Content = content;
     }
 
 }

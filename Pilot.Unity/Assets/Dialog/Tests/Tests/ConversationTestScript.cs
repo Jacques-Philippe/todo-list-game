@@ -5,24 +5,24 @@ public class ConversationTestScript
     ConversationMember john = new ConversationMember("John");
     ConversationMember player = new ConversationMember("Player");
 
-    private Phrase leaf = null;
-    private Phrase root = null;
+    private PhraseNode leaf = null;
+    private PhraseNode root = null;
 
 
-    private Phrase GetLeaf()
+    private PhraseNode GetLeaf()
     {
         if (this.leaf == null)
         {
-            this.leaf = new Phrase(content: "Good", from: player);
+            this.leaf = new PhraseNode(content: "Good", from: player);
         }
         return this.leaf;
     }
 
-    private Phrase GetRoot()
+    private PhraseNode GetRoot()
     {
         if (this.root == null)
         {
-            this.root = new Phrase(content: "How are you today?", from: john, next: GetLeaf());
+            this.root = new DefaultPhraseNode(content: "How are you today?", from: john, next: GetLeaf());
         }
         return this.root;
     }
@@ -31,6 +31,15 @@ public class ConversationTestScript
     {
         return new Conversation(GetRoot());
     }
+
+    [Test]
+    public void DefaultPhraseNodeIsProperlyInitialized()
+    {
+        var defaultPhraseNode = new DefaultPhraseNode("Hello world", john);
+        Assert.That(defaultPhraseNode.Speaker != null);
+        Assert.That(defaultPhraseNode.Content != null);
+    }
+
 
     /// <summary>
     /// Conversation constructor initializes the current phrase for that conversation
@@ -43,7 +52,7 @@ public class ConversationTestScript
 
         Assert.That(currentPhrase != null);
         Assert.That(!string.IsNullOrEmpty(currentPhrase.Content));
-        Assert.That(currentPhrase.Member != null);
+        Assert.That(currentPhrase.Speaker != null);
     }
 
 

@@ -2,8 +2,8 @@ using System;
 
 public class Conversation
 {
-    private Phrase current;
-    public Phrase Current {
+    private PhraseNode current;
+    public PhraseNode Current {
         private set {
             this.current = value;
             this.CurrentChanged?.Invoke();
@@ -17,14 +17,17 @@ public class Conversation
 
     public Action ConversationEnded;
 
-    public Conversation(Phrase start)
+    public Conversation(PhraseNode start)
     {
         this.Current = start;
     }
 
-    public Phrase Next()
+    public PhraseNode Next()
     {
-        this.Current = this.Current.Next;
+        if (this.Current is not DefaultPhraseNode defaultPhraseNode){
+            return null;
+        }
+        this.Current = defaultPhraseNode.Next;
         if (this.Current == null)
         {
             this.ConversationEnded?.Invoke();

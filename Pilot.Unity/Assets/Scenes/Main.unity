@@ -928,6 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cefce07b47d7245bb86c1e22fbff81b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  window: {fileID: 428346740}
   speakerText: {fileID: 841711448}
   contentText: {fileID: 100600144}
 --- !u!1660057539 &9223372036854775807

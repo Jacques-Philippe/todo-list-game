@@ -7,6 +7,10 @@ public class PlayerInteraction : MonoBehaviour
     private ConversationManager conversationManager;
 
     public Action OnPlayerInteracted;
+    private void Start()
+    {
+        conversationManager.StartConversation();
+    }
 
     void Update()
     {

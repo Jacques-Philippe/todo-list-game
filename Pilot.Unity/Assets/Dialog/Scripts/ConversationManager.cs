@@ -29,9 +29,9 @@ public class ConversationManager : MonoBehaviour
 
     private void InitializeConversations()
     {
-        Phrase phrase3 = new Phrase("I think.", jerry);
-        Phrase phrase2 = new Phrase("My name's Jerry.", jerry, phrase3);
-        Phrase phrase1 = new Phrase("Hey.", jerry, phrase2);
+        DefaultPhraseNode phrase3 = new DefaultPhraseNode("I think.", jerry);
+        DefaultPhraseNode phrase2 = new DefaultPhraseNode("My name's Jerry.", jerry, phrase3);
+        DefaultPhraseNode phrase1 = new DefaultPhraseNode("Hey.", jerry, phrase2);
 
         Conversation = new Conversation(phrase1);
 
@@ -55,7 +55,7 @@ public class ConversationManager : MonoBehaviour
     private void UpdateConversationUI(Conversation conversation)
     {
         var phrase = conversation.Current;
-        var speaker = phrase.Member.Name;
+        var speaker = phrase.Speaker.Name;
         var content = phrase.Content;
 
         this.conversationUI.Speaker = speaker;

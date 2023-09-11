@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
 
 public class ConversationTestScript
 {
@@ -57,7 +55,7 @@ public class ConversationTestScript
     {
         Conversation conversation = this.CreateConversation();
 
-        Assert.That(conversation.Current.Equals(GetRoot()));
+        Assert.That(conversation.Current == GetRoot());
 
         conversation.Next();
         

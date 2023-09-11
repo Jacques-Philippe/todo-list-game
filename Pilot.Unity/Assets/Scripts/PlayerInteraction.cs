@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField]
+    private ConversationManager conversationManager;
+
     public Action OnPlayerInteracted;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Player interacted");
+
+            conversationManager.Next();
+            
             OnPlayerInteracted?.Invoke();
         }   
     }

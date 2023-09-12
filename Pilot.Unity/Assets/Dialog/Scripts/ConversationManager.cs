@@ -13,6 +13,13 @@ public class ConversationManager : MonoBehaviour
         InitializeConversations();
     }
 
+    private void Start()
+    {
+        this.conversationUI.OnPromptOptionSelected += (phraseNode) => {
+            this.Conversation.Next(phraseNode as DefaultPhraseNode);
+        };
+    }
+
     public void StartConversation()
     {
         this.conversationUI.Display(this.Conversation.Current);
@@ -20,6 +27,10 @@ public class ConversationManager : MonoBehaviour
 
     public void Next()
     {
+        if (this.Conversation.Current is not DefaultPhraseNode)
+        {
+            return;
+        }
         if (this.Conversation.Next() == null)
         {
             this.Conversation = null;
@@ -57,7 +68,6 @@ public class ConversationManager : MonoBehaviour
         };
 
         this.Conversation = conversation;
-
     }
 
 }

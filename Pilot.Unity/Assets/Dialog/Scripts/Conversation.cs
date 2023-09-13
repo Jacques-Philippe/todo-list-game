@@ -28,34 +28,30 @@ public class Conversation
     }
 
     /// <summary>
-    /// Return the next phrase node given the current phrase node is a default phase node
+    /// Move to the next phrase node given the current phrase node is a default phase node
     /// </summary>
     /// <returns></returns>
-    public PhraseNode Next()
+    public void Next()
     {
         if (this.Current is not DefaultPhraseNode defaultPhraseNode)
         {
-            return null;
+            return;
         }
         this.Current = defaultPhraseNode.Next;
-        
-        return this.Current;
     }
 
     /// <summary>
-    /// Return the next phrase node given the incoming choice given the current phrase node is a prompt phrase node
+    /// Move to the next phrase node given the incoming choice given the current phrase node is a prompt phrase node
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>
-    public PhraseNode Next(DefaultPhraseNode option)
+    public void Next(DefaultPhraseNode option)
     {
         if (this.Current is not PromptPhraseNode promptPhraseNode)
         {
-            return null;
+            return;
         }
 
         this.Current = promptPhraseNode.NextPhraseNodeGivenInput(option);
-
-        return this.Current;
     }
 }

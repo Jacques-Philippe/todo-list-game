@@ -34,6 +34,8 @@ public class ConversationUI : MonoBehaviour
                 this.OnPromptOptionSelected?.Invoke(selectedOption);
             }
         };
+
+        this.CloseAll();
     }
 
     public void Display(PhraseNode node)

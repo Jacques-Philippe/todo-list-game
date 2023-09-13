@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class DefaultPhraseUI : MonoBehaviour
 {
-    //[SerializeField]
-    //protected GameObject backplate;
-
     [SerializeField]
     protected TextMeshProUGUI speakerText;
 

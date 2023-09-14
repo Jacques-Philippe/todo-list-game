@@ -11,38 +11,41 @@ public class PlayerInteraction : MonoBehaviour
     private ConversationProvider conversationProvider;
 
     public Action OnPlayerInteracted;
- 
+
+    private InteractableProvider interactableProvider = new InteractableProvider();
+
+    [SerializeField]
+    private Transform player;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            switch (conversationManager.State)
-            {
-                case ConversationManager.ConversationState.CLOSED:
-                    {
-                        var conversation = conversationProvider.Conversation;
-                        this.conversationManager.StartConversation(conversation);
-                        break;
-                    }
-                case ConversationManager.ConversationState.OPEN:
-                    {
-                        conversationManager.Next();
-                        break;
-                    }
-            }
-
-            //Assume no conversation is open
-            //Get the conversation from the provider
-            //Set it as current conversation
-            //Start the conversation
-            //if the conversation is started and the node is a default node, keep going through the nodes
-            //else wait for input from elsewhere
-            Debug.Log("Player interacted");
-
-            //conversationManager.Next();
-            
-            //OnPlayerInteracted?.Invoke();
-        }   
+            var i = interactableProvider.GetInteractable(player);
+            i.Interact();
+        }
     }
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        switch (conversationManager.State)
+    //        {
+    //            case ConversationManager.ConversationState.CLOSED:
+    //                {
+    //                    var conversation = conversationProvider.Conversation;
+    //                    this.conversationManager.StartConversation(conversation);
+    //                    break;
+    //                }
+    //            case ConversationManager.ConversationState.OPEN:
+    //                {
+    //                    conversationManager.Next();
+    //                    break;
+    //                }
+    //        }
+
+    //        Debug.Log("Player interacted");
+    //    }   
+    //}
 }

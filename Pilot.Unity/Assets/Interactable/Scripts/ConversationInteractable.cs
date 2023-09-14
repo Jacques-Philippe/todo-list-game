@@ -7,7 +7,7 @@ public class ConversationInteractable : BaseInteractable
 
     //TODO Sep 13 2023 replace with an interaction flow that finds the nearest conversation provider
     [SerializeField]
-    private ConversationProvider conversationProvider;
+    private BaseConversationProvider conversationProvider;
 
     public override void Interact()
     {

@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df6cc759bf0b453aa901b5dba125e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 350
   playerTransform: {fileID: 692179918}
 --- !u!1 &986364018
 GameObject:
@@ -671,8 +671,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1883843497}
-  - component: {fileID: 1883843498}
   - component: {fileID: 1883843499}
+  - component: {fileID: 1883843500}
   m_Layer: 0
   m_Name: Jerry
   m_TagString: Interactable
@@ -696,18 +696,6 @@ Transform:
   - {fileID: 1936908256}
   m_Father: {fileID: 1481813047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1883843498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883843496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc66d34206c0d448182978e728d1418d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1883843499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +709,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversationManager: {fileID: 1403158489}
-  conversationProvider: {fileID: 1883843498}
+  conversationProvider: {fileID: 1883843500}
+--- !u!114 &1883843500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883843496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970fec732c978425da451da7e6602af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1936908255
 GameObject:
   m_ObjectHideFlags: 0

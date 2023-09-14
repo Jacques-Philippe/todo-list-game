@@ -1,11 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ConversationProvider : MonoBehaviour
+public class JerryConversationProvider : BaseConversationProvider
 {
-    public Conversation Conversation { private set; get; }
-
-    private void Awake()
+    public override void InitializeConversation()
     {
         ConversationMember jerry = new ConversationMember("Jerry");
         ConversationMember player = new ConversationMember("Player");

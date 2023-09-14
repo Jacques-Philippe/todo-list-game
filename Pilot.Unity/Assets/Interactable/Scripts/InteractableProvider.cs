@@ -12,23 +12,6 @@ public class InteractableProvider
         return Closest(interactables, player);
     }
 
-    //private List<Transform> FindInteractables()
-    //{
-    //    List<Transform> transforms = new List<Transform>();
-    //    GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-
-    //    foreach (var rootGameObject in rootGameObjects)
-    //    {
-    //        BaseInteractable[] childrenTransforms = rootGameObject.GetComponentsInChildren<BaseInteractable>();
-    //        foreach (var childTransform in childrenTransforms)
-    //        {
-    //            transforms.Add(childTransform.transform);
-    //        }
-    //    }
-
-    //    return transforms;
-    //}
-
     private List<Transform> FindInteractables()
     {
         return GameObject.FindGameObjectsWithTag(INTERACTABLE_TAG).Select(g => g.transform).ToList();

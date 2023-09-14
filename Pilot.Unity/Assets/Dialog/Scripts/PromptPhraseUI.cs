@@ -42,7 +42,7 @@ public class PromptPhraseUI : DefaultPhraseUI
             PromptPhraseOptionUI ui = Instantiate(promptOptionPrefab);
             //Set in scene
             ui.gameObject.SetActive(true);
-            ui.transform.parent = optionContainer;
+            ui.transform.SetParent(optionContainer, false);
 
             //Populate element state
             ui.Content = content;

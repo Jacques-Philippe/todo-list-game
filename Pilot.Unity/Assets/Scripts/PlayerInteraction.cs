@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     public Action OnPlayerInteracted;
+    public Action OnInteractableLost;
+    public Action OnInteractableFound;
 
     [SerializeField]
     private Transform player;
@@ -13,6 +15,40 @@ public class PlayerInteraction : MonoBehaviour
 
     private InteractableProvider interactableProvider;
 
+    private IInteractable activeInteractable = null;
+    public IInteractable ActiveInteractable
+    {
+        private set
+        {
+            if (value == null)
+            {
+                //reset active interactable, if any
+                if (this.activeInteractable != null)
+                {
+                    Debug.Log($"Interactable {value} lost");
+                    this.activeInteractable = value;
+                    this.OnInteractableLost?.Invoke();
+                }
+                return;
+            }
+            //else if interactable is detected
+
+            //if the same interactable is detected, continue
+            if (this.activeInteractable == value)
+            {
+                Debug.Log("Same interactable -- skipping");
+                return;
+            }
+
+            //if a new interactable is detected, update
+            Debug.Log($"New interactable {value} found");
+            this.activeInteractable = value;
+            this.OnInteractableFound?.Invoke();
+
+        }
+        get => activeInteractable;
+    }
+
     private void Awake()
     {
         this.interactableProvider = new InteractableProvider(interactionDistance: this.interactionDistance);
@@ -21,7 +57,7 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         var i = interactableProvider.GetInteractable(player);
-        Debug.Log($"Interactable {i}");
+        this.ActiveInteractable = i;
 
         if (Input.GetKeyDown(KeyCode.E))
         {

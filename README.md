@@ -13,8 +13,9 @@ I want to try the following:
 
 # Missing Features
 - [x] player position setting properly in scene loading
-- [ ] story-driven notification (as opposed to dialog)
 - [ ] visual feedback for which things are interactable
+- [ ] story-driven notification (as opposed to dialog)
+- [ ] managing prompt selection via input
 - [ ] pause menu
 
 # Research

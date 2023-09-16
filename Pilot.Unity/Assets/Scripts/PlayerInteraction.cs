@@ -16,6 +16,9 @@ public class PlayerInteraction : MonoBehaviour
     private InteractableProvider interactableProvider;
 
     private IInteractable activeInteractable = null;
+    /// <summary>
+    /// The player's currently active interactable element
+    /// </summary>
     public IInteractable ActiveInteractable
     {
         private set
@@ -25,7 +28,6 @@ public class PlayerInteraction : MonoBehaviour
                 //reset active interactable, if any
                 if (this.activeInteractable != null)
                 {
-                    Debug.Log($"Interactable {value} lost");
                     this.activeInteractable = value;
                     this.OnInteractableLost?.Invoke();
                 }
@@ -36,12 +38,10 @@ public class PlayerInteraction : MonoBehaviour
             //if the same interactable is detected, continue
             if (this.activeInteractable == value)
             {
-                Debug.Log("Same interactable -- skipping");
                 return;
             }
 
             //if a new interactable is detected, update
-            Debug.Log($"New interactable {value} found");
             this.activeInteractable = value;
             this.OnInteractableFound?.Invoke();
 

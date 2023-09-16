@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8803546421780869744}
+  interactionDistance: 150
 --- !u!114 &6617846455350219313
 MonoBehaviour:
   m_ObjectHideFlags: 0

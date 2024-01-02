@@ -11,12 +11,16 @@ I want to try the following:
 1. Create a dev log after the game is finished and set the release schedule to be once a week
 1. Flesh out the story, try writing a short story
 
-# Missing Features
+# Todo
 - [x] player position setting properly in scene loading
-- [ ] visual feedback for which things are interactable
+- [x] visual feedback for when things are interactable
+- [ ] level design concepting
+- [ ] UI concepting
+- [ ] figuring out which music plays where
 - [ ] story-driven notification (as opposed to dialog)
 - [ ] managing prompt selection via input
-- [ ] pause menu
+- [ ] pause menu ?
+- [ ] money UI
 
 # Research
 I had to learn some things to make this project
